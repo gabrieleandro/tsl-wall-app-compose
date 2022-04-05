@@ -1,0 +1,43 @@
+version: "3.3"
+   
+services:
+  db:
+    image: postgres
+    container_name: tsl-wall-app-db
+    volumes:
+      - .backend/data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  backend:
+    container_name: tsl-wall-app-backend
+    build: ./backend
+    command: '/bin/bash -c "chmod +x /code/docker-entrypoint.sh && /code/docker-entrypoint.sh"'
+    volumes:
+      - ./backend:/code
+    ports:
+      - "8000:8000"
+    expose:
+      - '8000'
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+  frontend:
+    image: node:alpine
+    container_name: tsl-wall-app-frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/home/app
+    working_dir: /home/app
+    command: 'npm start'
+    links:
+      - backend
+    restart: 'no'
+
+volumes:
+    db:
