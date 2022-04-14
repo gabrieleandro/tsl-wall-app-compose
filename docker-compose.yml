@@ -5,11 +5,8 @@ services:
     image: postgres
     container_name: tsl-wall-app-db
     volumes:
-      - .backend/data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - ./backend/data/db:/var/lib/postgresql/data
+    env_file: ./backend/.env
   backend:
     container_name: tsl-wall-app-backend
     build: ./backend
@@ -20,10 +17,7 @@ services:
       - "8000:8000"
     expose:
       - '8000'
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file: ./backend/.env
     depends_on:
       - db
   frontend:
