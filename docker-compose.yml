@@ -5,7 +5,7 @@ services:
     image: postgres
     container_name: tsl-wall-app-db
     volumes:
-      - ./backend/data/db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
     env_file: .env
   backend:
     container_name: tsl-wall-app-backend
@@ -23,12 +23,13 @@ services:
   frontend:
     image: node:alpine
     container_name: tsl-wall-app-frontend
+    env_file:  ./frontend/.env
     ports:
       - '3000:3000'
     volumes:
       - ./frontend:/home/app
     working_dir: /home/app
-    command: 'npm start'
+    command:  [sh, -c, "yarn && yarn start"]
     links:
       - backend
     restart: 'no'
