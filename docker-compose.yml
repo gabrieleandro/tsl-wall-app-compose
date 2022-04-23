@@ -23,7 +23,7 @@ services:
   frontend:
     image: node:alpine
     container_name: tsl-wall-app-frontend
-    env_file:  ./frontend/.env
+    env_file:  .env
     ports:
       - '3000:3000'
     volumes:
