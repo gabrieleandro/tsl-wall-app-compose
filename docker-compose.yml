@@ -1,12 +1,6 @@
 version: "3.3"
    
 services:
-  db:
-    image: postgres
-    container_name: tsl-wall-app-db
-    volumes:
-      - db:/var/lib/postgresql/data
-    env_file: .env
   backend:
     container_name: tsl-wall-app-backend
     build: ./backend
@@ -18,8 +12,6 @@ services:
     expose:
       - '8000'
     env_file: .env
-    depends_on:
-      - db
   frontend:
     image: node:alpine
     container_name: tsl-wall-app-frontend
@@ -33,6 +25,4 @@ services:
     links:
       - backend
     restart: 'no'
-
-volumes:
-    db:
+ 
