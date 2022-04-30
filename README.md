@@ -32,7 +32,7 @@ git clone git@github.com:gabrieleandro/tsl-wall-app-backend.git backend
 ```
 
 ## Environment variables
-Create a .env file with
+Copy our .env.example file (included in this repo) or create a .env file with 
 
 ```env
 DEBUG=
@@ -76,3 +76,8 @@ Back-End tests
 ```bash
 docker-compose -f docker-compose.yml run backend python manage.py test
 ```
+
+Front-End tests
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose-test.yml run test

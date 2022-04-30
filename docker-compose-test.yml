@@ -1,0 +1,23 @@
+version: "3.4"
+   
+services:
+  frontend:
+    environment:
+      - REACT_APP_API_BASE_URL=http://backend:8000/api
+      - REACT_APP_COOKIE_NAME=tslwallapp.token
+  test:
+    image: "cypress/included:9.6.0"
+    container_name: tsl-wall-app-cypress
+    depends_on:
+      - frontend
+      - backend
+    links:
+      - frontend
+      - backend
+    environment:
+      - CYPRESS_baseUrl=http://frontend:3000
+      - CYPRESS_VIDEO=false
+    working_dir: /e2e
+    volumes:
+      - ./frontend:/e2e
+ 

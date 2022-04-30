@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
    
 services:
   backend:
@@ -12,6 +12,12 @@ services:
     expose:
       - '8000'
     env_file: .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
   frontend:
     image: node:alpine
     container_name: tsl-wall-app-frontend
@@ -24,5 +30,9 @@ services:
     command:  [sh, -c, "yarn && yarn start"]
     links:
       - backend
-    restart: 'no'
- 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
