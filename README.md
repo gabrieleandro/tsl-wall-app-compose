@@ -9,6 +9,7 @@ Wall App is an application that allows users to register, login, and write on a 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Environment variables](#environment-variables)
+- [Observations](#observations)
 - [Build with Docker Compose](#build-with-docker-compose)
 - [Testing](#testing)
 
@@ -17,7 +18,7 @@ Wall App is an application that allows users to register, login, and write on a 
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Installation
+# Installation
 
 Clone this repository.
 ```bash
@@ -31,7 +32,20 @@ git clone git@github.com:gabrieleandro/tsl-wall-app-frontend.git frontend
 git clone git@github.com:gabrieleandro/tsl-wall-app-backend.git backend
 ```
 
-## Environment variables
+Make sure you have the following directories tree:
+
+```bash
+.
+├── backend
+├── frontend
+├── docker-compose-test.yml
+├── docker-compose.yml
+├── .env.example
+├── .env
+└── README.md
+```
+
+# Environment variables
 Copy our .env.example file (included in this repo) or create a .env file with 
 
 ```env
@@ -55,29 +69,40 @@ REACT_APP_COOKIE_NAME=
 
 SECRET_KEY: You can generate a key, [here](https://djecrety.ir/).
 
-In order to send emails using Sendgrid set:
+## Observations
+The welcome email will be printed on the console.
 
-```env
+The default EMAIL_BACKEND is using django.core.mail.backends.console.EmailBackend. Instead of sending out real emails the console backend just writes the emails that would be sent to the standard output [more info](https://docs.djangoproject.com/en/4.0/topics/email/#console-backend).
+
+### In order to send emails using Sendgrid:
+Create an API Key in Sendgrid, [here](https://app.sendgrid.com/settings/api_keys).
+Adn set the EMAIL_BACKEND to 
+```bash
 EMAIL_BACKEND=sendgrid_backend.SendgridBackend
 ```
-SENDGRID_API_KEY: Create an API Key in Sendgrid, [here](https://app.sendgrid.com/settings/api_keys) .
 
-## Build with Docker Compose
+# Build with Docker Compose
 
 ```bash
 docker-compose -f docker-compose.yml build
 docker-compose -f docker-compose.yml up -d
 ```
 
-## Testing
+Now you can access the backend at http://localhost:8000/
 
-Back-End tests
+and the frontend at http://localhost:3000/
+
+# Testing
+
+Make sure you run the previous commands and the containers are up.
+
+#### Back-End tests
 
 ```bash
 docker-compose -f docker-compose.yml run backend python manage.py test
 ```
 
-Front-End tests
+#### Front-End tests
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose-test.yml run test
