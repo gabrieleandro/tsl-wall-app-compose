@@ -10,7 +10,7 @@ Wall App is an application that allows users to register, login, and write on a 
 - [Installation](#installation)
 - [Environment variables](#environment-variables)
 - [Build with Docker Compose](#build-with-docker-compose)
-- [Test](#test)
+- [Testing](#testing)
 
 ## Prerequisites
 
