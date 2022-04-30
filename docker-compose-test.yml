@@ -9,11 +9,11 @@ services:
     image: "cypress/included:9.6.0"
     container_name: tsl-wall-app-cypress
     depends_on:
-      - frontend
       - backend
+      - frontend
     links:
-      - frontend
       - backend
+      - frontend
     environment:
       - CYPRESS_baseUrl=http://frontend:3000
       - CYPRESS_VIDEO=false

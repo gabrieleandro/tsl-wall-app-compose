@@ -16,11 +16,12 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8000"]
       interval: 30s
       timeout: 10s
-      retries: 5
+      retries: 15
       start_period: 30s
   frontend:
     image: node:alpine
     container_name: tsl-wall-app-frontend
+    restart: on-failure
     env_file:  .env
     ports:
       - '3000:3000'
@@ -36,5 +37,5 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
-      retries: 5
+      retries: 15
       start_period: 30s
