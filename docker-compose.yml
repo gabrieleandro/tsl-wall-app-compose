@@ -28,6 +28,8 @@ services:
       - ./frontend:/home/app
     working_dir: /home/app
     command:  [sh, -c, "yarn && yarn start"]
+    depends_on:
+      - backend
     links:
       - backend
     healthcheck:
