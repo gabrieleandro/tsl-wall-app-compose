@@ -107,11 +107,16 @@ Make sure you run the previous commands and the containers are up.
 
 #### Back-End tests
 
+Run the tests using the following command:
+
 ```bash
 docker-compose -f docker-compose.yml run backend python manage.py test
 ```
 
 #### Front-End tests
 
+Run docker-compose up in order to recreate the frontend container with the tests env from docker-compose-test and wait to start.
+
 ```bash
+docker-compose -f docker-compose.yml -f docker-compose-test.yml up -d
 docker-compose -f docker-compose.yml -f docker-compose-test.yml run test
