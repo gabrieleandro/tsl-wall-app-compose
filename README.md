@@ -109,8 +109,6 @@ Make sure you run the previous commands and the containers are up.
 
 Run the tests using the following command:
 
-Run the tests using the following command:
-
 ```bash
 docker-compose -f docker-compose.yml run backend python manage.py test
 ```
